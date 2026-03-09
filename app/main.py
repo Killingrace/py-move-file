@@ -24,7 +24,7 @@ def move_file(command: str) -> None:
             os.makedirs(folder_path, exist_ok=True)
 
         if not filename:
-            destination_file_name = os.path.join(folder_path, filename)
+            destination_file_name = os.path.join(folder_path, source_file_name)
 
         with open(destination_file_name, "w") as destination_file:
             destination_file.write(content)
