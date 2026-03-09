@@ -18,28 +18,19 @@ def move_file(command: str) -> None:
 
         os.remove(source_file_name)
 
-        if "/" in destination_file_name:
+        folder_path, filename = os.path.split(destination_file_name)
 
-            if destination_file_name[-1] == "/":
-                *path_folders, = destination_file_name.split("/")
-            else:
-                *path_folders, = destination_file_name.split("/")[:-1]
+        if folder_path:
+            os.makedirs(folder_path, exist_ok=True)
 
-            for i in range(len(path_folders)):
-                path_to_folder = os.path.join(*path_folders[: i + 1])
-
-                try:
-                    os.mkdir(path_to_folder)
-
-                except FileExistsError:
-                    pass
-
-        if destination_file_name[-1] == "/":
-            destination_file_name = os.path.join(destination_file_name,
-                                                 source_file_name)
+        if not filename:
+            destination_file_name = os.path.join(folder_path, filename)
 
         with open(destination_file_name, "w") as destination_file:
             destination_file.write(content)
 
     except FileNotFoundError:
         pass
+
+
+move_file("mv suka.txt blat/suka.txt")
