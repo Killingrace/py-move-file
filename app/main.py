@@ -31,6 +31,3 @@ def move_file(command: str) -> None:
 
     except FileNotFoundError:
         pass
-
-
-move_file("mv suka.txt blat/suka.txt")
